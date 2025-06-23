@@ -18,6 +18,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import ScrollButton from "./ScrollButton";
 
 function Footer() {
   return (
@@ -118,11 +119,13 @@ function Footer() {
           </Grid>
         </Grid>
         <Divider sx={{ background: "#FB9E3A", mb: 1 }} />
-
-        <Typography>
-          Copyright © 2021 movie<span style={{ color: "red" }}>&</span>
-          tation. All rights reserved.
-        </Typography>
+        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Typography>
+            Copyright © 2021 movie<span style={{ color: "red" }}>&</span>
+            tation. All rights reserved.
+          </Typography>
+          <ScrollButton />
+        </Box>
       </Container>
     </>
   );

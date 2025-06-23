@@ -16,13 +16,19 @@ function MoviesCards() {
   const navigate = useNavigate();
 
   const handleClick = (movie) => {
-    localStorage.setItem("isMovie", movie.media_type);
     navigate(`/deatilpage/${movie.id}`);
   };
   return (
     <>
       {loading && <Loading />}
       <Box sx={{ mt: 4 }}>
+        {data.length == 0 && (
+          <Typography
+            sx={{ color: "white", fontSize: "2rem", fontWeight: "bolder" }}
+          >
+            No Data Found..
+          </Typography>
+        )}
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           {data?.map((movie, index) => (
             <Grid size={{ xs: 12, sm: 6, md: 3, lg: 3 }}>
@@ -30,27 +36,32 @@ function MoviesCards() {
                 key={index}
                 sx={{
                   background: "black",
-                  minHeight: "100",
-                  maxHeight: "100",
+                  minHeight: "90",
+                  maxHeight: "90",
                 }}
               >
                 <CardMedia
                   component="img"
-                  image={`http://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  image={
+                    movie.poster_path
+                      ? `http://image.tmdb.org/t/p/w500${movie.poster_path}`
+                      : "https://m.media-amazon.com/images/I/716C3Gtm-qL.jpg"
+                  }
                   alt={movie.title || movie.name}
+                  style={{ maxHeight: "25rem", minHeight: "25rem" }}
                 />
+
                 <CardContent>
                   <Box
                     sx={{
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
-
                       margin: "0.5rem",
                     }}
                   >
                     <Typography sx={{ fontWeight: "bolder", color: "white" }}>
-                      Popularity : {movie.popularity}
+                      Popularity : {movie.popularity.toFixed(2)}
                     </Typography>
                   </Box>
                   <Box

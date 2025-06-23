@@ -53,6 +53,9 @@ const movieSlice = createSlice({
       .addCase(fetchResults.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
+      })
+      .addCase(fetchResults.rejected, (state) => {
+        state.loading = false;
       });
   },
 });

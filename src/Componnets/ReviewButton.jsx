@@ -1,4 +1,12 @@
-import { Box, Button, Card, Modal, Stack, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Card,
+  Modal,
+  Stack,
+  Typography,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,6 +33,7 @@ function ReviewButton() {
       )
     );
   }, [input, id, dispatch]);
+
   return (
     <>
       <Button
@@ -57,15 +66,11 @@ function ReviewButton() {
             boxShadow: 24,
             borderRadius: 2,
             p: 4,
-            overflow: "hidden",
             display: "flex",
             flexDirection: "column",
             overflowY: "auto",
           }}
         >
-          {review.length === 0 && (
-            <Typography sx={{ color: "balck" }}>No result found...</Typography>
-          )}
           <Box
             sx={{
               display: "flex",
@@ -77,13 +82,28 @@ function ReviewButton() {
               <HighlightOffIcon />
             </Button>
           </Box>
+          <Typography
+            sx={{
+              fontSize: "2rem",
+              fontWeight: "bolder",
+              color: "#01579b",
+            }}
+          >
+            Reviews
+          </Typography>
+          {review.length === 0 && (
+            <Typography
+              sx={{ color: "black", fontSize: "2rem", fontWeight: "bolder" }}
+            >
+              No result found...
+            </Typography>
+          )}
 
           {review.map((item) => (
             <Card
               sx={{
                 maxHeight: "300px",
-                minHeight: "200px",
-                
+                minHeight: "300px",
                 margin: 2,
                 background: "#e1f5fe",
                 overflowY: "auto",
@@ -96,11 +116,28 @@ function ReviewButton() {
                   margin: "10px",
                 }}
               >
-                <Typography sx={{ color: "#01579b", fontWeight: "bolder" }}>
-                  {item.author}
-                </Typography>
-                <Typography sx={{ color: "#01579b", fontWeight: "bolder" }}>
-                  {item.created_at}
+                <Box
+                  sx={{
+                    display: { xs: "block", md: "flex" },
+                    justifyContent: "start",
+                  }}
+                >
+                  <Avatar src="/broken-image.jpg" />
+                  <Typography
+                    sx={{ color: "#01579b", fontWeight: "bolder", p: "0.5rem" }}
+                  >
+                    {item.author}
+                  </Typography>
+                </Box>
+
+                <Typography
+                  sx={{
+                    color: "#01579b",
+                    fontWeight: "bolder",
+                    margin: "10px",
+                  }}
+                >
+                  {item.created_at.slice(0, 10)}
                 </Typography>
               </Box>
 

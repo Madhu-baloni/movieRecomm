@@ -12,6 +12,8 @@ function TabPage() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  localStorage.setItem("isMovie", value === "all" ? "movie" : value);
+
   useEffect(() => {
     dispatch(
       fetchMovies(

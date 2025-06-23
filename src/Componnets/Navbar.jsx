@@ -1,17 +1,8 @@
-import {
-  AppBar,
-  Avatar,
-  Box,
-  Container,
-  IconButton,
-  Toolbar,
-  Tooltip,
-  Typography,
-  InputBase,
-} from "@mui/material";
+import { AppBar, Box, Container, Toolbar, Typography } from "@mui/material";
 
 import { useNavigate } from "react-router-dom";
 import SearchInput from "./SearchInput";
+import DropDownMenu from "./DropDownMenu";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -59,11 +50,7 @@ function Navbar() {
             <SearchInput />
           </Box>
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton sx={{ p: 0, marginLeft: { xs: "1rem", md: "none" } }}>
-                <Avatar alt="User Avatar" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
+            <DropDownMenu />
           </Box>
         </Toolbar>
       </AppBar>

@@ -10,7 +10,7 @@ export const fetchCredits = createAsyncThunk(
 );
 
 const creditsSlice = createSlice({
-  name: "casts",
+  name: "credits",
   initialState: {
     data: [],
   },

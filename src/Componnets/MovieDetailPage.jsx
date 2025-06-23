@@ -1,19 +1,23 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Credits from "./Credits";
 import Crews from "./Crews";
 import { useDispatch } from "react-redux";
 import { fetchRecomm } from "../slice/MoviesSlice";
-
 import Recommendation from "./Recommendation";
 import ReviewButton from "./ReviewButton";
 function MovieDetailPage() {
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
   const { id } = useParams();
   let input = localStorage.getItem("isMovie");
   const dispatch = useDispatch();
+  const handleClick = () => {
+    navigate("/checkout");
+    localStorage.setItem("movieId", id);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,8 +74,17 @@ function MovieDetailPage() {
                 }}
               >
                 <img
-                  src={`http://image.tmdb.org/t/p/w500${data.poster_path}`}
-                  style={{ width: { xs: "20rem", md: "100%" } }}
+                  src={
+                    data.poster_path
+                      ? `http://image.tmdb.org/t/p/w500${data.poster_path}`
+                      : `https://m.media-amazon.com/images/I/716C3Gtm-qL.jpg`
+                  }
+                  alt={data.original_title}
+                  style={{
+                    width: { xs: "20rem", md: "100%" },
+                    maxHeight: "30rem",
+                    minHeight: "30rem",
+                  }}
                 />
               </Box>
             </Grid>
@@ -106,8 +119,24 @@ function MovieDetailPage() {
               >
                 Rating: {data.vote_average}
               </Typography>
-              <Box>
+              <Box sx={{ display: "flex" }}>
                 <ReviewButton />
+                <Button
+                  onClick={handleClick}
+                  sx={{
+                    color: "white",
+                    fontWeight: "bolder",
+                    background: "#FB9E3A",
+                    mr: 2,
+                    px: 3,
+                    cursor: "pointer",
+                    "&:hover": {
+                      background: "#f18a0a",
+                    },
+                  }}
+                >
+                  Buy Ticket
+                </Button>
               </Box>
             </Grid>
           </Grid>

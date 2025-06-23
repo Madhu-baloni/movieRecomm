@@ -6,6 +6,9 @@ import posterData from "../DummmyData/posterData";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import HeroPage from "./TabPage";
 function HomePage() {
+  const obj = JSON.parse(localStorage.getItem("currentUser"));
+  const userId = obj?.userId;
+  console.log(userId);
   return (
     <>
       <Container>

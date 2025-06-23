@@ -36,6 +36,13 @@ function Crews() {
           Crews
         </Typography>
         <Divider sx={{ background: "#FB9E3A" }} />
+        {crew.length == 0 && (
+          <Typography
+            sx={{ color: "white", fontSize: "2rem", fontWeight: "bolder" }}
+          >
+            No Data Found..
+          </Typography>
+        )}
         <Box
           sx={{
             display: "flex",

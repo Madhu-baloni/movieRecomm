@@ -9,6 +9,5 @@ export const store = configureStore({
     casts: creditsReducer,
     crews: crewsReducer,
     reviews: reviewSlice,
-    
   },
 });
