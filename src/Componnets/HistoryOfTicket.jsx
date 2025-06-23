@@ -26,7 +26,7 @@ function HistoryOfTicket() {
         History of Booked Tickets
       </Typography>
       <Box sx={{ p: 2 }}>
-        {data.length > 0 ? (
+        {data?.length > 0 ? (
           data
             .filter((item) => item.userId === userId)
             .map((purchase, index) => (
