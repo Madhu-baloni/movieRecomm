@@ -63,7 +63,10 @@ function HomePage() {
             {posterData.map((item) => (
               <img
                 src={item.img}
-                style={{ minHeight: "41rem", maxHeight: "41rem" }}
+                style={{
+                  minHeight: { xs: "10rem", md: "41rem" },
+                  maxHeight: { xs: "10rem", md: "41rem" },
+                }}
               />
             ))}
           </Carousel>
