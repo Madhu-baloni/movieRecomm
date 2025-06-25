@@ -11,7 +11,21 @@ import {
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Loading from "./Loading";
+import styled from "@emotion/styled";
+
 function MoviesCards() {
+  const StyledBtn = styled(Button)`
+    color: white;
+    font-weight: bolder;
+    background-color: #fb9e3a;
+    padding-left: 24px;
+    padding-right: 24px;
+    cursor: pointer;
+    margin-right: 16px;
+    &:hover {
+      background-color: #f18a0a;
+    }
+  `;
   const { data, loading } = useSelector((state) => state.movies);
   const navigate = useNavigate();
 
@@ -70,21 +84,14 @@ function MoviesCards() {
                       justifyContent: "center",
                       alignItems: "center",
                       background: "#FB9E3A",
+                      "&:hover": {
+                        background: "#f18a0a",
+                      },
                     }}
                   >
-                    <Button
-                      onClick={() => handleClick(movie)}
-                      sx={{
-                        color: "white",
-                        fontWeight: "bolder",
-                        background: "#FB9E3A",
-                        mr: 2,
-                        px: 3,
-                        cursor: "pointer",
-                      }}
-                    >
+                    <StyledBtn onClick={() => handleClick(movie)}>
                       Details
-                    </Button>
+                    </StyledBtn>
                   </Box>
                 </CardContent>
               </Card>

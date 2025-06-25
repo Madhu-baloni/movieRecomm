@@ -2,7 +2,7 @@ import { Box, Button, Modal, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
-function Payment({ handleClick }) {
+function Payment({ handleClick,  }) {
   const [open, setOpen] = useState(false);
   const loggedIn = JSON.parse(localStorage.getItem("currentUser"));
   const navigate = useNavigate();
@@ -17,7 +17,8 @@ function Payment({ handleClick }) {
   const handleClose = () => {
     setOpen(false);
     handleClick();
-    toast("Your ticket is confirmed", {
+    toast("Your ticket has been confirmed", {
+      icon: "👏",
       duration: 5000,
       style: {
         color: "green",
