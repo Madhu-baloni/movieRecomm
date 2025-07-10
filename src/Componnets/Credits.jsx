@@ -1,32 +1,39 @@
-import { Avatar, Box, Divider, Typography } from "@mui/material";
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { fetchCredits } from "../slice/MovieCreditsSlice";
-import { useSelector } from "react-redux";
+
+import { Avatar, Box, Divider, Typography } from "@mui/material";
+
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-function Credits() {
+
+import { fetchCredits } from "../slice/MovieCreditsSlice";
+
+const Credits = () => {
   const { id } = useParams();
-  const cast = useSelector((state) => state.casts.data);
   const dispatch = useDispatch();
-  let input = localStorage.getItem("isMovie");
+  const cast = useSelector((state) => state.casts.data);
+
   useEffect(() => {
+    const input = localStorage.getItem("isMovie");
+
     try {
       let Apiurl;
+
       if (input === "movie") {
         Apiurl = `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US&api_key=${
           import.meta.env.VITE_SECRET_API_KEY
         }`;
-        dispatch(fetchCredits(Apiurl));
       } else {
         Apiurl = `https://api.themoviedb.org/3/tv/${id}/credits?language=en-US&api_key=${
           import.meta.env.VITE_SECRET_API_KEY
         }`;
+
         dispatch(fetchCredits(Apiurl));
       }
     } catch (err) {
       console.log("Error fetching data :", err);
     }
-  }, [id, input, dispatch]);
+  }, [id, dispatch]);
+
   return (
     <>
       <Box mt={2}>
@@ -35,7 +42,9 @@ function Credits() {
         >
           Casts
         </Typography>
+
         <Divider sx={{ background: "#FB9E3A" }} />
+
         {cast.length == 0 && (
           <Typography
             sx={{ color: "white", fontSize: "2rem", fontWeight: "bolder" }}
@@ -43,6 +52,7 @@ function Credits() {
             No Data Found..
           </Typography>
         )}
+
         <Box
           sx={{
             display: "flex",
@@ -64,6 +74,7 @@ function Credits() {
               >
                 {actor.name}
               </Typography>
+
               <Typography
                 sx={{
                   textAlign: "center",
@@ -80,6 +91,6 @@ function Credits() {
       </Box>
     </>
   );
-}
+};
 
 export default Credits;

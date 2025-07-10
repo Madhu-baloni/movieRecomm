@@ -1,11 +1,12 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
 
-function QuantityTicket({ quantity, onIncrease, onDecrease }) {
+const QuantityTicket = ({ quantity, onIncrease, onDecrease }) => {
   return (
     <>
       <Typography sx={{ fontWeight: "bolder", fontSize: "1.2rem", p: 1 }}>
         Quantity...
       </Typography>
+
       <Stack direction="row" spacing={4}>
         <Box
           sx={{
@@ -28,9 +29,11 @@ function QuantityTicket({ quantity, onIncrease, onDecrease }) {
             -
           </Button>
         </Box>
+
         <Typography sx={{ fontWeight: "bolder", fontSize: "1.2rem" }}>
           {quantity}
         </Typography>
+
         <Box
           sx={{
             background: "#FB9E3A",
@@ -55,6 +58,6 @@ function QuantityTicket({ quantity, onIncrease, onDecrease }) {
       </Stack>
     </>
   );
-}
+};
 
 export default QuantityTicket;

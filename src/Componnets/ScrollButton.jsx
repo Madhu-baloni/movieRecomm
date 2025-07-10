@@ -1,13 +1,15 @@
-import { Box } from "@mui/material";
 import React from "react";
+import { Box } from "@mui/material";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-function ScrollButton() {
+
+const ScrollButton = () => {
   const handleClick = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   };
+
   return (
     <>
       <Box
@@ -23,6 +25,6 @@ function ScrollButton() {
       </Box>
     </>
   );
-}
+};
 
 export default ScrollButton;

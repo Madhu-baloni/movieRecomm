@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from "react";
+
 import {
   Avatar,
   Box,
@@ -7,10 +9,10 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+
 import HistoryOfTicket from "./HistoryOfTicket";
 
-function ProfilePage() {
+const ProfilePage = () => {
   const [user, setUser] = useState({
     firstname: "",
     lastname: "",
@@ -31,6 +33,7 @@ function ProfilePage() {
     localStorage.removeItem("currentUser");
     window.location.href = "/login";
   };
+
   return (
     <>
       <Container>
@@ -48,6 +51,7 @@ function ProfilePage() {
               >
                 User Profile
               </Typography>
+
               <Box
                 sx={{
                   display: "flex",
@@ -79,6 +83,7 @@ function ProfilePage() {
                 <Typography sx={{ fontWeight: "bolder" }}>
                   Full Name:
                 </Typography>
+
                 <Typography sx={{ fontWeight: "bolder" }}>
                   {user.firstname + " " + user.lastname}
                 </Typography>
@@ -90,11 +95,13 @@ function ProfilePage() {
                 }}
               >
                 <Typography sx={{ fontWeight: "bolder" }}>Email:</Typography>
+
                 <Typography sx={{ fontWeight: "bolder" }}>
                   {user.email}
                 </Typography>
               </Box>
             </Card>
+
             <Button
               onClick={handleLogout}
               sx={{
@@ -112,6 +119,7 @@ function ProfilePage() {
               Logout
             </Button>
           </Grid>
+
           <Grid size={{ xs: 12, md: 8, lg: 8 }}>
             <HistoryOfTicket />
           </Grid>
@@ -119,6 +127,6 @@ function ProfilePage() {
       </Container>
     </>
   );
-}
+};
 
 export default ProfilePage;

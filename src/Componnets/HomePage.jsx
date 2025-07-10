@@ -1,21 +1,23 @@
 import React from "react";
+
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { Box, Container } from "@mui/material";
-import posterData from "../DummmyData/posterData";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
+
+import posterData from "../DummmyData/posterData";
 import HeroPage from "./TabPage";
 
-function HomePage() {
+const HomePage = () => {
   return (
     <>
       <Container>
         <Box sx={{ mt: 0 }}>
           <Carousel
-            autoPlay={true}
+            autoPlay
             interval={2500}
             showThumbs={false}
-            infiniteLoop={true}
+            infiniteLoop
             showIndicators={false}
             renderArrowPrev={(onClickHandler, hasPrev, label) =>
               hasPrev && (
@@ -60,21 +62,26 @@ function HomePage() {
               )
             }
           >
-            {posterData.map((item) => (
+            {posterData.map((item, index) => (
               <img
+                key={index}
                 src={item.img}
+                alt={`poster-${index}`}
                 style={{
-                  minHeight: { xs: "10rem", md: "41rem" },
-                  maxHeight: { xs: "10rem", md: "41rem" },
+                  width: "100%",
+                  objectFit: "cover",
+                  height: "auto",
+                  maxHeight: "41rem",
                 }}
               />
             ))}
           </Carousel>
         </Box>
+
         <HeroPage />
       </Container>
     </>
   );
-}
+};
 
 export default HomePage;

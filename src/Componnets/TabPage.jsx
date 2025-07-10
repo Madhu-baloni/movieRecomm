@@ -1,17 +1,23 @@
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+
 import { Box, Divider, Tab, Typography } from "@mui/material";
 import Tabs from "@mui/lab/TabList";
 import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
-import { useEffect, useState } from "react";
+
 import { fetchMovies } from "../slice/MoviesSlice";
-import { useDispatch } from "react-redux";
 import MoviesCards from "./MoviesCards";
-function TabPage() {
+
+const TabPage = () => {
   const [value, setValue] = useState("all");
+
   const dispatch = useDispatch();
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
   localStorage.setItem("isMovie", value === "all" ? "movie" : value);
 
   useEffect(() => {
@@ -22,6 +28,7 @@ function TabPage() {
       )
     );
   }, [dispatch, value]);
+
   return (
     <>
       <Box sx={{ width: "100%", mt: "4rem" }}>
@@ -30,6 +37,7 @@ function TabPage() {
         >
           Trending
         </Typography>
+
         <Divider sx={{ background: "#FB9E3A" }} />
 
         <TabContext value={value}>
@@ -44,12 +52,15 @@ function TabPage() {
               <Tab label="Series" value="tv" sx={{ fontWeight: "bolder" }} />
             </Tabs>
           </Box>
+
           <TabPanel value="all" tabIndex={0}>
             <MoviesCards />
           </TabPanel>
+
           <TabPanel value="movie" tabIndex={1}>
             <MoviesCards />
           </TabPanel>
+
           <TabPanel value="tv" tabIndex={2}>
             <MoviesCards />
           </TabPanel>
@@ -57,6 +68,6 @@ function TabPage() {
       </Box>
     </>
   );
-}
+};
 
 export default TabPage;

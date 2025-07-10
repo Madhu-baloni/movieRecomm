@@ -1,11 +1,14 @@
-import { Grid, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import Autocomplete from "@mui/material/Autocomplete";
+
 import axios from "axios";
 
-function BillingAddress() {
-  //fecth user current location
+import { Grid, TextField } from "@mui/material";
+import Autocomplete from "@mui/material/Autocomplete";
+
+const BillingAddress = () => {
   const [location, setLocation] = useState(null);
+  const [cinemas, setCinemas] = useState([]);
+
   const fetchUserLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -16,11 +19,11 @@ function BillingAddress() {
       console.log("Geolocation is not supported by this browser.");
     }
   };
+
   useEffect(() => {
     fetchUserLocation();
   }, []);
-  //fecth nearBycinemas
-  const [cinemas, setCinemas] = useState([]);
+
   const fetchCinemas = async () => {
     if (location) {
       try {
@@ -37,6 +40,7 @@ function BillingAddress() {
       }
     }
   };
+
   useEffect(() => {
     if (location) {
       fetchCinemas();
@@ -75,6 +79,6 @@ function BillingAddress() {
       </Grid>
     </>
   );
-}
+};
 
 export default BillingAddress;

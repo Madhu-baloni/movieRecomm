@@ -8,6 +8,7 @@ import CheckoutPage from "./CheckoutPage";
 import ProfilePage from "./ProfilePage";
 import LoginPage from "./LoginPage";
 import { AuthLoader } from "../utils/AuthLoader";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -41,12 +42,12 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-function Router() {
+const Router = () => {
   return (
     <>
       <RouterProvider router={router} />
     </>
   );
-}
+};
 
 export default Router;

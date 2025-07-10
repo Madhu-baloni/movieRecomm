@@ -1,4 +1,8 @@
 import React from "react";
+
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import {
   Box,
   Button,
@@ -8,12 +12,11 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+
 import Loading from "./Loading";
 import styled from "@emotion/styled";
 
-function MoviesCards() {
+const MoviesCards = () => {
   const StyledBtn = styled(Button)`
     color: white;
     font-weight: bolder;
@@ -26,12 +29,13 @@ function MoviesCards() {
       background-color: #f18a0a;
     }
   `;
-  const { data, loading } = useSelector((state) => state.movies);
   const navigate = useNavigate();
+  const { data, loading } = useSelector((state) => state.movies);
 
   const handleClick = (movie) => {
     navigate(`/deatilpage/${movie.id}`);
   };
+
   return (
     <>
       {loading && <Loading />}
@@ -101,6 +105,6 @@ function MoviesCards() {
       </Box>
     </>
   );
-}
+};
 
 export default MoviesCards;

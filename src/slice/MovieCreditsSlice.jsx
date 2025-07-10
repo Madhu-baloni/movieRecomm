@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const fetchCredits = createAsyncThunk(
   "movies/credits",
@@ -20,4 +20,5 @@ const creditsSlice = createSlice({
     });
   },
 });
+
 export default creditsSlice.reducer;

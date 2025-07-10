@@ -1,14 +1,17 @@
+import { useNavigate } from "react-router-dom";
+
 import { AppBar, Box, Container, Toolbar, Typography } from "@mui/material";
 
-import { useNavigate } from "react-router-dom";
 import SearchInput from "./SearchInput";
 import DropDownMenu from "./DropDownMenu";
 
-function Navbar() {
+const Navbar = () => {
   const navigate = useNavigate();
+
   const handleClick = () => {
     navigate("/");
   };
+
   return (
     <Container>
       <AppBar position="sticky" sx={{ background: "black" }}>
@@ -40,7 +43,8 @@ function Navbar() {
               &
             </span>
             tation
-          </Typography>{" "}
+          </Typography>
+
           <Box
             sx={{
               display: { xs: "flex", sm: "flex" },
@@ -49,6 +53,7 @@ function Navbar() {
           >
             <SearchInput />
           </Box>
+
           <Box sx={{ flexGrow: 0 }}>
             <DropDownMenu />
           </Box>
@@ -56,6 +61,6 @@ function Navbar() {
       </AppBar>
     </Container>
   );
-}
+};
 
 export default Navbar;

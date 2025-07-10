@@ -1,3 +1,8 @@
+import React, { useEffect, useState } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+
 import {
   Avatar,
   Box,
@@ -7,24 +12,27 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import { useDispatch, useSelector } from "react-redux";
 import { fetchReviews } from "../slice/ReviewSlice";
-import { useParams } from "react-router-dom";
-function ReviewButton() {
+
+const ReviewButton = () => {
+  const [open, setOpen] = useState(false);
+
   const { id } = useParams();
   const dispatch = useDispatch();
   const review = useSelector((state) => state.reviews.data);
-  const [open, setOpen] = useState(false);
+
   const handleClose = () => {
     setOpen(false);
   };
+
   const handleOpen = () => {
     setOpen(true);
   };
-  let input = localStorage.getItem("isMovie");
+
   useEffect(() => {
+    const input = localStorage.getItem("isMovie");
+
     dispatch(
       fetchReviews(
         `https://api.themoviedb.org/3/${input}/${id}/reviews?language=en-US&page=1&api_key=${
@@ -32,7 +40,7 @@ function ReviewButton() {
         }`
       )
     );
-  }, [input, id, dispatch]);
+  }, [id, dispatch]);
 
   return (
     <>
@@ -82,6 +90,7 @@ function ReviewButton() {
               <HighlightOffIcon />
             </Button>
           </Box>
+
           <Typography
             sx={{
               fontSize: "2rem",
@@ -91,6 +100,7 @@ function ReviewButton() {
           >
             Reviews
           </Typography>
+
           {review.length === 0 && (
             <Typography
               sx={{ color: "black", fontSize: "2rem", fontWeight: "bolder" }}
@@ -123,6 +133,7 @@ function ReviewButton() {
                   }}
                 >
                   <Avatar src="/broken-image.jpg" />
+
                   <Typography
                     sx={{ color: "#01579b", fontWeight: "bolder", p: "0.5rem" }}
                   >
@@ -152,6 +163,6 @@ function ReviewButton() {
       </Modal>
     </>
   );
-}
+};
 
 export default ReviewButton;

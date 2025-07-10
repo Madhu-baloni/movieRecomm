@@ -1,11 +1,16 @@
-import { Box, Button, Modal, Typography } from "@mui/material";
 import React, { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
-function Payment({ handleClick,  }) {
+
+import { Box, Button, Modal, Typography } from "@mui/material";
+
+const Payment = ({ handleClick }) => {
   const [open, setOpen] = useState(false);
-  const loggedIn = JSON.parse(localStorage.getItem("currentUser"));
+
   const navigate = useNavigate();
+  const loggedIn = JSON.parse(localStorage.getItem("currentUser"));
+
   const handleClicks = () => {
     if (!loggedIn) {
       alert("please login");
@@ -14,6 +19,7 @@ function Payment({ handleClick,  }) {
       setOpen(true);
     }
   };
+
   const handleClose = () => {
     setOpen(false);
     handleClick();
@@ -31,9 +37,11 @@ function Payment({ handleClick,  }) {
       navigate("/");
     }, 1000);
   };
+
   return (
     <>
       <Toaster />
+
       <Box sx={{ m: 3 }}>
         <Button
           onClick={handleClicks}
@@ -51,6 +59,7 @@ function Payment({ handleClick,  }) {
           Payment
         </Button>
       </Box>
+
       <Modal open={open} onClose={handleClose}>
         <Box
           sx={{
@@ -76,6 +85,7 @@ function Payment({ handleClick,  }) {
           >
             Your ticket booking has been confirmed.
           </Typography>
+
           <Button
             onClick={handleClose}
             sx={{
@@ -97,6 +107,6 @@ function Payment({ handleClick,  }) {
       </Modal>
     </>
   );
-}
+};
 
 export default Payment;

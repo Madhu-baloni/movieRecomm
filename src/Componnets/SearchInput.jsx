@@ -1,14 +1,20 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, InputBase } from "@mui/material";
-import { useDispatch } from "react-redux";
+
 import { fetchResults } from "../slice/MoviesSlice";
-function SearchInput() {
+
+const SearchInput = () => {
   const [searchMovie, setSearchMovie] = useState("");
+
   const dispatch = useDispatch();
-  const input = localStorage.getItem("isMovie");
   const navigate = useNavigate();
+
+  const input = localStorage.getItem("isMovie");
+
   const handleClick = () => {
     if (searchMovie.trim()) {
       navigate("/resultpage");
@@ -27,6 +33,7 @@ function SearchInput() {
       setSearchMovie("");
     }
   };
+
   return (
     <>
       <Box
@@ -44,6 +51,7 @@ function SearchInput() {
           sx={{ color: "black", background: "white" }}
           onClick={handleClick}
         />
+
         <InputBase
           sx={{
             ml: 1,
@@ -60,6 +68,6 @@ function SearchInput() {
       </Box>
     </>
   );
-}
+};
 
 export default SearchInput;

@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const fetchMovies = createAsyncThunk(
   "movies/fetchMovies",
@@ -16,6 +16,7 @@ export const fetchRecomm = createAsyncThunk(
     return response.data.results;
   }
 );
+
 export const fetchResults = createAsyncThunk(
   "movies/fetchResults",
   async (endpoint) => {
@@ -23,6 +24,7 @@ export const fetchResults = createAsyncThunk(
     return response.data.results;
   }
 );
+
 const movieSlice = createSlice({
   name: "movies",
   initialState: {

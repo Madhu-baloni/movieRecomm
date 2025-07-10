@@ -1,5 +1,5 @@
+import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";;
 
 export const fetchReviews = createAsyncThunk(
   "movies/fetchReviews",
@@ -29,4 +29,5 @@ const reviewSlice = createSlice({
       });
   },
 });
+
 export default reviewSlice.reducer;

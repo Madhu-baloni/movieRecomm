@@ -1,25 +1,32 @@
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+
 import { useNavigate, useParams } from "react-router-dom";
-import Credits from "./Credits";
-import Crews from "./Crews";
+
 import { useDispatch } from "react-redux";
 import { fetchRecomm } from "../slice/MoviesSlice";
+
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
+
+import Credits from "./Credits";
+import Crews from "./Crews";
 import Recommendation from "./Recommendation";
 import ReviewButton from "./ReviewButton";
-function MovieDetailPage() {
+
+const MovieDetailPage = () => {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const { id } = useParams();
-  let input = localStorage.getItem("isMovie");
   const dispatch = useDispatch();
+
   const handleClick = () => {
     navigate("/checkout");
     localStorage.setItem("movieId", id);
   };
 
   useEffect(() => {
+    const input = localStorage.getItem("isMovie");
+
     const fetchData = async () => {
       try {
         let apiUrl;
@@ -46,7 +53,8 @@ function MovieDetailPage() {
         }`
       )
     );
-  }, [input, id, dispatch]);
+  }, [id, dispatch]);
+
   return (
     <>
       <Container mt={2}>
@@ -88,6 +96,7 @@ function MovieDetailPage() {
                 />
               </Box>
             </Grid>
+
             <Grid size={{ xs: 12, md: 6 }}>
               <Typography
                 variant="h5"
@@ -101,24 +110,28 @@ function MovieDetailPage() {
               >
                 {data.title || data.name}
               </Typography>
+
               <Typography
                 variant="body2"
                 sx={{ fontSize: "1.2rem", mb: 2, textAlign: "justify" }}
               >
                 {data.overview}
               </Typography>
+
               <Typography
                 variant="subtitle1"
                 sx={{ fontWeight: "bold", mb: 1 }}
               >
                 Release Date: {data.release_date || data.first_air_date}
               </Typography>
+
               <Typography
                 variant="subtitle1"
                 sx={{ fontWeight: "bold", mb: 2 }}
               >
                 Rating: {data.vote_average}
               </Typography>
+
               <Box sx={{ display: "flex" }}>
                 <ReviewButton />
                 <Button
@@ -147,6 +160,6 @@ function MovieDetailPage() {
       </Container>
     </>
   );
-}
+};
 
 export default MovieDetailPage;

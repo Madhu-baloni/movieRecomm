@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const fetchCrews = createAsyncThunk("movies/crews", async (endpoint) => {
   const response = await axios.get(endpoint);

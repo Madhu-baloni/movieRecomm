@@ -1,20 +1,22 @@
-import { Box, Card, Grid, Stack, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import QuantityTicket from "./QuantityTicket";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+
+import { Box, Card, Grid, Stack, Typography } from "@mui/material";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 
-function PurchaseDetail({ setDatas }) {
-  let input = localStorage.getItem("isMovie");
-  let movieId = localStorage.getItem("movieId");
+import QuantityTicket from "./QuantityTicket";
+
+const PurchaseDetail = ({ setDatas }) => {
   const [data, setData] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedTime, setSelectedTime] = useState(new Date());
+  let movieId = localStorage.getItem("movieId");
   const obj = JSON.parse(localStorage.getItem("currentUser"));
   const userId = obj?.userId;
+
   const handleIncrease = () => {
     setQuantity((prev) => {
       const newQuantity = prev + 1;
@@ -22,6 +24,7 @@ function PurchaseDetail({ setDatas }) {
       return newQuantity;
     });
   };
+
   const handleDecrease = () => {
     if (quantity > 1) {
       setQuantity((prev) => {
@@ -31,6 +34,7 @@ function PurchaseDetail({ setDatas }) {
       });
     }
   };
+
   const savePurchaseDetails = (title, quantity) => {
     const totalPrice = 30 * quantity;
     const purchaseDetail = {
@@ -46,7 +50,10 @@ function PurchaseDetail({ setDatas }) {
     existingPurchase.push(purchaseDetail);
     setDatas(existingPurchase);
   };
+
   useEffect(() => {
+    const input = localStorage.getItem("isMovie");
+
     const fetchMovie = async () => {
       let apiUrl = `https://api.themoviedb.org/3/${input}/${movieId}?language=en-US&api_key=${
         import.meta.env.VITE_SECRET_API_KEY
@@ -56,7 +63,8 @@ function PurchaseDetail({ setDatas }) {
       savePurchaseDetails(response.data.title || response.data.name, quantity);
     };
     fetchMovie();
-  }, [input, movieId, quantity]);
+  }, [movieId, quantity]);
+
   return (
     <>
       <Box>
@@ -72,6 +80,7 @@ function PurchaseDetail({ setDatas }) {
             >
               Purchase details
             </Typography>
+
             <Grid container spacing={2}>
               <Grid size={{ xs: 6, md: 6 }}>
                 <img
@@ -88,10 +97,12 @@ function PurchaseDetail({ setDatas }) {
                   }}
                 />
               </Grid>
+
               <Grid size={{ xs: 6, md: 6 }}>
                 <Typography sx={{ fontWeight: "bold", fontSize: "1rem", p: 1 }}>
                   {data.title || data.name || data.original_name}
                 </Typography>
+
                 <QuantityTicket
                   quantity={quantity}
                   onIncrease={handleIncrease}
@@ -99,6 +110,7 @@ function PurchaseDetail({ setDatas }) {
                 />
               </Grid>
             </Grid>
+
             <Stack direction="column" spacing={2} m={3}>
               <DatePicker
                 label="Select Date"
@@ -126,6 +138,6 @@ function PurchaseDetail({ setDatas }) {
       </Box>
     </>
   );
-}
+};
 
 export default PurchaseDetail;

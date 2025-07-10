@@ -1,7 +1,7 @@
-import { Box, Container, Divider, Typography } from "@mui/material";
 import React from "react";
+import { Box, Container, Divider, Typography } from "@mui/material";
 import MoviesCards from "./MoviesCards";
-function ResultPage() {
+const ResultPage = () => {
   return (
     <>
       <Container mt={2}>
@@ -11,12 +11,13 @@ function ResultPage() {
           >
             Results
           </Typography>
+
           <Divider sx={{ background: "#FB9E3A" }} />
         </Box>
         <MoviesCards />
       </Container>
     </>
   );
-}
+};
 
 export default ResultPage;

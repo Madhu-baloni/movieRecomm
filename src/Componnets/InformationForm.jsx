@@ -1,12 +1,13 @@
-import { Grid, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { Grid, TextField } from "@mui/material";
 
-function InformationForm() {
+const InformationForm = () => {
   const [user, setUser] = useState({
     firstname: "",
     lastname: "",
     email: "",
   });
+
   useEffect(() => {
     const userData = localStorage.getItem("currentUser");
     if (userData) {
@@ -15,6 +16,7 @@ function InformationForm() {
       console.log("No user data found in localStorage.");
     }
   }, []);
+
   return (
     <Grid container spacing={2}>
       <Grid size={{ xs: 6, md: 6 }}>
@@ -29,6 +31,7 @@ function InformationForm() {
           sx={{ mt: 3, background: "white" }}
         />
       </Grid>
+
       <Grid size={{ xs: 6, md: 6 }}>
         <TextField
           variant="filled"
@@ -41,6 +44,7 @@ function InformationForm() {
           sx={{ mt: 3, background: "white" }}
         />
       </Grid>
+
       <Grid size={{ xs: 12, md: 12, lg: 12 }} sx={{ mt: 3 }}>
         <TextField
           variant="filled"
@@ -55,6 +59,6 @@ function InformationForm() {
       </Grid>
     </Grid>
   );
-}
+};
 
 export default InformationForm;

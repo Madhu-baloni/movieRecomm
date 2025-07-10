@@ -12,4 +12,5 @@ const poster = [
     img: "https://w0.peakpx.com/wallpaper/307/244/HD-wallpaper-the-batman-movie-poster-art-the-batman-batman-superheroes-movies-2022-movies.jpg",
   },
 ];
+
 export default poster;

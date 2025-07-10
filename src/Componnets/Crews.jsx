@@ -1,32 +1,38 @@
 import { useEffect } from "react";
+
+import { Avatar, Box, Divider, Typography } from "@mui/material";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+
 import { fetchCrews } from "../slice/MovieCrewsSlice";
-import { Avatar, Box, Divider, Typography } from "@mui/material";
 
 function Crews() {
   const { id } = useParams();
-  const crew = useSelector((state) => state.crews.data);
   const dispatch = useDispatch();
-  let input = localStorage.getItem("isMovie");
+  const crew = useSelector((state) => state.crews.data);
+
   useEffect(() => {
+    const input = localStorage.getItem("isMovie");
+
     try {
       let apiurl;
+
       if (input === "movie") {
         apiurl = `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US&api_key=${
           import.meta.env.VITE_SECRET_API_KEY
         }`;
-        dispatch(fetchCrews(apiurl));
       } else {
         apiurl = `https://api.themoviedb.org/3/tv/${id}/credits?language=en-US&api_key=${
           import.meta.env.VITE_SECRET_API_KEY
         }`;
-        dispatch(fetchCrews(apiurl));
       }
+      dispatch(fetchCrews(apiurl));
     } catch (err) {
       console.log("Error fetching:", err);
     }
-  }, [id, input, dispatch]);
+  }, [id, dispatch]);
+
   return (
     <>
       <Box>
@@ -35,7 +41,9 @@ function Crews() {
         >
           Crews
         </Typography>
+
         <Divider sx={{ background: "#FB9E3A" }} />
+
         {crew.length == 0 && (
           <Typography
             sx={{ color: "white", fontSize: "2rem", fontWeight: "bolder" }}
@@ -43,6 +51,7 @@ function Crews() {
             No Data Found..
           </Typography>
         )}
+
         <Box
           sx={{
             display: "flex",
